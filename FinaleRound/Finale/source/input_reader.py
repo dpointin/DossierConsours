@@ -1,4 +1,4 @@
-from Pizza import Pizza
+from Classe1 import Pizza
 
 
 def pizza_parser(file_name):

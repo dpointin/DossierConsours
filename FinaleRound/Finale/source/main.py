@@ -1,4 +1,4 @@
-from PizzaParser import pizza_parser
+from input_reader import pizza_parser
 import os
 
 
