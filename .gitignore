@@ -1,5 +1,6 @@
 #ajustement propre à notre projet 
 source_code.zip
+*.pyc
 
 #Fichier de base pour le python éviter de tout se ballader
 # Byte-compiled / optimized / DLL files
