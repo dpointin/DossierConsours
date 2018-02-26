@@ -3,6 +3,7 @@ source_code.zip
 *.pyc
 *.iml 
 *.xml
+OutputSubmitter.py 
 
 #Fichier de base pour le python éviter de tout se ballader
 # Byte-compiled / optimized / DLL files
