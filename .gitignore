@@ -1,9 +1,9 @@
-#ajustement propre à notre projet 
+﻿#ajustement propre à notre projet 
 source_code.zip
 *.pyc
 *.iml 
 *.xml
-OutputSubmitter.py 
+FinaleRound/OutputSubmitter.py
 
 #Fichier de base pour le python éviter de tout se ballader
 # Byte-compiled / optimized / DLL files
