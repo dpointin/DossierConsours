@@ -20,4 +20,4 @@ def hash_code(project_name):
     output_submitter.close()
 
 if __name__ == '__main__':
-    hash_code("Pizza")
+    hash_code("FinalRound")
