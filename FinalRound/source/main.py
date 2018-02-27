@@ -1,4 +1,4 @@
-from input_reader import pizza_parser
+from input_reader import problem_parser
 import os
 
 
@@ -11,12 +11,12 @@ def write_output(input_file, output_folder, output):
 def solve(input_files, output_folder):
     for file_name in input_files:
         print "******************* Reading file {} *******************".format(file_name)
-        pizza = pizza_parser(file_name)
+        problem = problem_parser(file_name)
         print "\n\nINPUT = "
-        print pizza
-        pizza.guillotine_solve()
-        output = pizza.get_output()
+        print problem
+        problem.solve()
+        output = problem.get_output()
         print "\n\nOUTPUT = "
         print output
-        write_output(file_name, output_folder, pizza.get_output())
+        write_output(file_name, output_folder, problem.get_output())
         print "******************** Solved file {} *******************".format(file_name)
