@@ -12,11 +12,6 @@ def solve(input_files, output_folder):
     for file_name in input_files:
         print "******************* Reading file {} *******************".format(file_name)
         pizza = pizza_parser(file_name)
-        print "\n\nINPUT = "
-        print pizza
-        pizza.guillotine_solve()
-        output = pizza.get_output()
-        print "\n\nOUTPUT = "
-        print output
+        pizza.greedy_solve()
         write_output(file_name, output_folder, pizza.get_output())
         print "******************** Solved file {} *******************".format(file_name)

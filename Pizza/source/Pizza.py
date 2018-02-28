@@ -1,5 +1,10 @@
 import numpy as np
 import tqdm
+import logging
+from collections import deque
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(module)s : %(message)s',
+                    datefmt="%Y-%m-%d %H:%M:%S")
 
 
 class Pizza:
@@ -21,6 +26,50 @@ class Pizza:
     def get_output(self):
         return str(len(self.slices)) + "\n" + \
                "\n".join(" ".join(str(c) for c in pizza_slice) for pizza_slice in self.slices)
+
+    def get_possible_shapes(self):
+        possible_shapes_set = set()
+        for size in xrange(2 * self.min_ing_number, self.max_size):
+            # https://stackoverflow.com/questions/16939402/quick-way-to-extend-a-set-if-we-know-elements-are-unique
+            for i in xrange(1, int(pow(size, 0.5) + 1)):
+                if size % i == 0:
+                    possible_shapes_set.add((i, size // i))
+                    possible_shapes_set.add((size // i, i))
+        return possible_shapes_set
+
+    def greedy_solve(self):
+        possible_shapes = sorted(list(self.get_possible_shapes()), key=lambda s: s[0], reverse=False)
+        logging.info("Input = {} \n".format(str(self)))
+        logging.info("Possible shapes = " + str(possible_shapes))
+        possible_locations = deque([(x, y) for x in xrange(self.n_rows) for y in xrange(self.n_cols)])
+        empty_cells = set(possible_locations)
+        for it in xrange(1000000):
+            if it % 100 == 0:
+                logging.info("Iteration = {} - Max Score = {} - Current Score = {} - Score % = {}".format(
+                    it, self.n_cols * self.n_rows, self.n_cols * self.n_rows - len(empty_cells),
+                    round(100 * (self.n_cols * self.n_rows - len(empty_cells)) / float(self.n_cols * self.n_rows), 2)))
+            if not possible_locations:
+                break
+            location = possible_locations.popleft()
+            for shape in possible_shapes:
+                if self.slice_fits(location, shape, empty_cells) and \
+                        self.is_slice_content_valid(location[0], location[1],
+                                                    location[0] + shape[0], location[1] + shape[1]):
+                    break
+            else:
+                continue
+            self.slices.append((location[0], location[1],
+                                location[0] + shape[0] - 1, location[1] + shape[1] - 1))
+            for i in xrange(shape[0]):
+                for j in xrange(shape[1]):
+                    empty_cells.remove((location[0] + i, location[1] + j))
+                    try :
+                        possible_locations.remove((location[0] + i, location[1] + j))
+                    except ValueError:
+                        pass
+        logging.info("FINAL --- Iteration = {} - Max Score = {} - Current Score = {} - Score % = {}".format(
+            it, self.n_cols * self.n_rows, self.n_cols * self.n_rows - len(empty_cells),
+            round(100 * (self.n_cols * self.n_rows - len(empty_cells)) / float(self.n_cols * self.n_rows), 2)))
 
     def guillotine_solve(self):
         """
@@ -86,3 +135,7 @@ class Pizza:
 
     def is_slice_size_valid(self, i, j, k, l):
         return (k - i) * (l - j) <= self.max_size
+
+    def slice_fits(self, random_location, shape, empty_cells):
+        return all((random_location[0] + i, random_location[1] + j) in empty_cells
+                   for i in xrange(shape[0]) for j in xrange(shape[1]))
