@@ -14,6 +14,7 @@ class Problem:
         s = "Grid {}\n".format(str(self.grid))
         s += "Vehicles \n{}\n".format("\n".join(str(vehicle) for vehicle in self.list_vehicles))
         s += "Rides \n{}\n".format("\n".join(str(ride) for ride in self.list_rides))
+        s += "Max time {} / Bonus {}".format(self.time, self.bonus)
         return s
 
     def get_output(self):
@@ -25,7 +26,7 @@ class Problem:
 
     def solve(self):
         self.list_rides = [r for r in self.list_rides if r.feasible]
-        print len(self.list_rides)
+        print "Max score = ", sum(r.length for r in self.list_rides)+self.bonus * len(self.list_rides)
         self.list_rides.sort(key=lambda x: x.length, reverse=True)
         self.list_rides = deque(self.list_rides)
         remaining_rides_id = set(r.id for r in self.list_rides)
@@ -35,9 +36,9 @@ class Problem:
             for vehicle in self.list_vehicles:
                 if vehicle.time == 0:
                     possible_rides = [r for r in self.list_rides if
-                                      r.id in remaining_rides_id and vehicle.ride_cost(r, current_time) <= current_time]
+                                      r.id in remaining_rides_id and vehicle.ride_duration(r, current_time) <= current_time]
                     if possible_rides:
-                        best_ride = max(possible_rides, key=lambda ride: vehicle.ride_score(ride, current_time))
+                        best_ride = max(possible_rides, key=lambda ride: vehicle.ride_score(ride, current_time, self.bonus))
                         vehicle.affect_ride(best_ride, current_time)
                         remaining_rides_id.remove(best_ride.id)
                 else:
