@@ -7,6 +7,8 @@ class Vehicle:
 
     def __str__(self):
         s = str(id)
-        s +=  " ".join(str(r.id) for r in self.list_rides) + "\n"
+        s +=  " ".join(str(r.id) for r in self.list_rides)
         return s
+
+
 
