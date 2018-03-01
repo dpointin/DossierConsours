@@ -13,7 +13,7 @@ def solve(input_files, output_folder):
         print "******************* Reading file {} *******************".format(file_name)
         problem = problem_parser(file_name)
         print "\n\nINPUT = "
-        print problem
+        #print problem
         problem.solve()
         output = problem.get_output()
         print "\n\nOUTPUT = "

@@ -20,5 +20,5 @@ class Ride:
 
     @property
     def feasible(self):
-        return self.length <= (self.end_time - self.start_time)
+        return self.length <= (self.end_time - self.start_time) and self.start_time < self.end_time
 
