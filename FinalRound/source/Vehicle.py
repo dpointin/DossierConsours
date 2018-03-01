@@ -6,6 +6,11 @@ class Vehicle:
         self.temps_total = T
 
     def __str__(self):
+        s = "ID = {}\nPosition = {} \n".format(self.id,self.position)
+        s += "Total time= {}\n".format(self.temps_total)
+        return s
+
+    def get_output(self):
         s = str(self.id)
         s += " ".join(str(r.id) for r in self.list_rides)
         return s

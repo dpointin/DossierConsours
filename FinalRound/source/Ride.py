@@ -7,10 +7,11 @@ class Ride:
         self.end_time = end_time
 
     def __str__(self):
-        s = "Start Point = {} \n".format(self.start_point)
+        s = "ID = {}\nStart Point = {} \n".format(self.id,self.start_point)
         s += "End Point = {}\n".format(self.end_point)
         s += "Minimum start time = {}\n".format(self.start_time)
         s += "Maximum end time = {}\n".format(self.end_time)
+        s += "Length = {}\n".format(self.length)
         return s
 
     @property
