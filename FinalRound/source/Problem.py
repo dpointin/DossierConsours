@@ -28,7 +28,6 @@ class Problem:
         self.list_rides = deque(self.list_rides)
         remaining_rides_id = set(r.id for r in self.list_rides)
 
-        print self
         for current_time in tqdm.tqdm(xrange(self.time)):
             # print self
             for vehicle in self.list_vehicles:
