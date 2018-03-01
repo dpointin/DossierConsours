@@ -1,4 +1,4 @@
-class ride:
+class Ride:
     def __init__(self, id, start_point, end_point, start_time, end_time):
         self.id = id
         self.start_point = start_point
