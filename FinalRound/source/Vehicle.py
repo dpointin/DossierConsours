@@ -27,7 +27,7 @@ class Vehicle:
         return float(
             abs(ride.start_point[0] - ride.end_point[0]) + abs(ride.start_point[1] - ride.end_point[1])) / float(
             max(ride.start_time - current_time,
-                (abs(ride.start_point[0] - self.position[0]) + abs(ride.start_point[1] - self.position[1]))))
+                (abs(ride.start_point[0] - self.position[0]) + abs(ride.start_point[1] - self.position[1])))+1)
 
     def get_output(self):
         s = str(len(self.list_rides)) + " " + " ".join(str(r.id) for r in self.list_rides)
