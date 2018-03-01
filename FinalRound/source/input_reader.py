@@ -8,7 +8,7 @@ def problem_parser(file_name):
     with open(file_name, "r") as input_file:
         r, c, f, n, b, t = map(int, input_file.readline().strip().split())
         grid = np.zeros(shape=(r, c))
-        vehicles = [Vehicle(i, t) for i in xrange(f)]
+        vehicles = [Vehicle(i+1, t) for i in xrange(f)]
         rides = []
         for i in xrange(n):
             a, b, x, y, s, t = map(int, input_file.readline().strip().split())

@@ -11,6 +11,5 @@ class Vehicle:
         return s
 
     def get_output(self):
-        s = str(self.id)
-        s += " ".join(str(r.id) for r in self.list_rides)
+        s = str(len(self.list_rides))+" "+" ".join(str(r.id) for r in self.list_rides)
         return s

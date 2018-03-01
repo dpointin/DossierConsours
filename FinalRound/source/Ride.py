@@ -17,3 +17,8 @@ class Ride:
     @property
     def length(self):
         return abs(self.start_point[0] - self.end_point[0]) + abs(self.start_point[1] - self.end_point[1])
+
+    @property
+    def feasible(self):
+        return self.length <= (self.end_time - self.start_time)
+
