@@ -29,14 +29,15 @@ class Problem:
         self.list_rides.sort(key=lambda x: x.length, reverse=True)
         self.list_rides = deque(self.list_rides)
         remaining_rides_id = set(r.id for r in self.list_rides)
-        print self
+
         for current_time in xrange(self.time, -1, -1):
-            #print self
+            # print self
             for vehicle in self.list_vehicles:
                 if vehicle.time == 0:
-                    possible_rides = [r for r in self.list_rides if r.id in remaining_rides_id and vehicle.ride_cost(r, current_time) <= current_time]
+                    possible_rides = [r for r in self.list_rides if
+                                      r.id in remaining_rides_id and vehicle.ride_cost(r, current_time) <= current_time]
                     if possible_rides:
-                        best_ride = max(possible_rides, key=lambda ride: self.get_score(vehicle.position, ride))
+                        best_ride = max(possible_rides, key=lambda ride: vehicle.ride_score(ride, current_time))
                         vehicle.affect_ride(best_ride, current_time)
                         remaining_rides_id.remove(best_ride.id)
                 else:

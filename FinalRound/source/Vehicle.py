@@ -20,8 +20,14 @@ class Vehicle:
     def ride_cost(self, ride, current_time):
         score = max(ride.start_time - current_time,
                     (abs(ride.start_point[0] - self.position[0]) + abs(ride.start_point[1] - self.position[1])))
-        score += abs(self.position[0] - ride.end_point[0]) + abs(self.position[1] - ride.end_point[1])
+        score += abs(ride.start_point[0] - ride.end_point[0]) + abs(ride.start_point[1] - ride.end_point[1])
         return score
+
+    def ride_score(self, ride, current_time):
+        return float(
+            abs(ride.start_point[0] - ride.end_point[0]) + abs(ride.start_point[1] - ride.end_point[1])) / float(
+            max(ride.start_time - current_time,
+                (abs(ride.start_point[0] - self.position[0]) + abs(ride.start_point[1] - self.position[1]))))
 
     def get_output(self):
         s = str(len(self.list_rides)) + " " + " ".join(str(r.id) for r in self.list_rides)

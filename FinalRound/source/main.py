@@ -16,7 +16,7 @@ def solve(input_files, output_folder):
         #print problem
         problem.solve()
         output = problem.get_output()
-        print "\n\nOUTPUT = "
-        print output
+        #print "\n\nOUTPUT = "
+        #print output
         write_output(file_name, output_folder, problem.get_output())
         print "******************** Solved file {} *******************".format(file_name)
