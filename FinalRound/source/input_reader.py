@@ -11,6 +11,6 @@ def problem_parser(file_name):
         vehicles = [Vehicle(i+1, t) for i in xrange(f)]
         rides = []
         for i in xrange(n):
-            a, b, x, y, s, t = map(int, input_file.readline().strip().split())
-            rides.append(Ride(i, (a, b), (x, y), s, y))
+            a, b, x, y, s, f = map(int, input_file.readline().strip().split())
+            rides.append(Ride(i, (a, b), (x, y), s, f))
         return Problem(grid, vehicles, rides, t, b)

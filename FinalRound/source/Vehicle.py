@@ -8,7 +8,7 @@ class Vehicle:
 
     def __str__(self):
         s = "ID = {}\nPosition = {} \n".format(self.id, self.position)
-        s += "Total time= {}\n".format(self.temps_total)
+        s += "Time= {}\n".format(self.time)
         return s
 
     def affect_ride(self, ride, current_time):
