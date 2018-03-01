@@ -13,8 +13,7 @@ class Problem:
         return s
 
     def get_output(self):
-        return str(len(self.slices)) + "\n" + \
-               "\n".join(" ".join(str(c) for c in pizza_slice) for pizza_slice in self.slices)
+        return str(self)
 
     def solve(self):
         return ""
