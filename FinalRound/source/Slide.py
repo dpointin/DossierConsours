@@ -7,4 +7,8 @@ class Slide:
         return "slide {}\n".format(str(self.photos))
 
     def score(self, autre_slide):
-        score = min()
+        common_tag = self.tags.intersection(autre_slide.tags)
+        tag_only_S1 = self.tags.difference(autre_slide.tags)
+        tag_only_S2 = autre_slide.tags.difference(self.tags)
+        score = min(common_tag,tag_only_S1,tag_only_S2)
+        return score
