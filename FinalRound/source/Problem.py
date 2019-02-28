@@ -8,8 +8,8 @@ class Problem:
         self.slides = self.slide_creator()
 
     def __str__(self):
-        s = "Photos available {}\n".format(str(self.photos))
-        s += "Slideshow \n{}\n".format("\n".join(str(slide) for slide in self.slideshow))
+        s = "Slides available {}\n".format("\n".join(str(slide) for slide in self.slides))
+        #s += "Slideshow \n{}\n".format("\n".join(str(slide) for slide in self.slideshow))
         return s
 
     def get_output(self):
@@ -33,4 +33,25 @@ class Problem:
         return slides
 
     def solve(self):
-        self.slideshow = self.slides
+        #Clean slides with one tag
+        #self.slides = [slide for slide in self.slides if slide.tags < 1]
+        print "****", self
+        curr_slide = self.slides[0]
+        self.slideshow.append(curr_slide)
+        self.slides.remove(curr_slide)
+        i = 0
+        s = len(self.slides)
+        while self.slides :
+            if i%100 == 0 :
+                print "{} loops done over {}".format(i,s)
+            max_score = -1
+            max_slide = None
+            for slide in self.slides :
+                slide_score = slide.score(curr_slide)
+                if slide_score > max_score :
+                    max_score = slide_score
+                    max_slide = slide
+            self.slideshow.append(max_slide)
+            self.slides.remove(max_slide)
+            curr_slide = max_slide
+            i+=1

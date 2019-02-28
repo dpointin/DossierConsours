@@ -7,7 +7,7 @@ class Slide:
             self.tags = photos[0].tags.union(photos[1].tags)
 
     def __str__(self):
-        return "slide {}\n".format(str(self.photos))
+        return "slide {}, tags {}\n".format(" ".join(str(photo) for photo in self.photos), str(self.tags))
 
     def score(self, autre_slide):
         common_tag = len(self.tags.intersection(autre_slide.tags))
