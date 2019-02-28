@@ -32,6 +32,21 @@ class Problem:
                 enattente = f
         return slides
 
+    def slide_creator2(self):
+        slides = []
+        enattente = []
+        for f in self.photos:
+            if f.is_horizontal:
+                slides.append(Slide([f]))
+            else:
+                enattente.append(f)
+
+        enattente.sort(key=lambda x: len(x.tags), reverse=False)
+        while (len(enattente) > 1):
+            slides.append(Slide([enattente.pop(0), enattente.pop(-1)]))
+
+        return slides
+
     def solve(self):
         #Clean slides with one tag
         #self.slides = [slide for slide in self.slides if slide.tags < 1]
