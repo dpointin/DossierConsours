@@ -12,11 +12,10 @@ def solve(input_files, output_folder):
     for file_name in input_files:
         print "******************* Reading file {} *******************".format(file_name)
         problem = problem_parser(file_name)
-        print "\n\nINPUT = "
         #print problem
         problem.solve()
         output = problem.get_output()
-        #print "\n\nOUTPUT = "
-        #print output
-        write_output(file_name, output_folder, problem.get_output())
+        print "\n\nOUTPUT = "
+        print output
+        write_output(file_name, output_folder, output)
         print "******************** Solved file {} *******************".format(file_name)

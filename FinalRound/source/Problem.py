@@ -14,7 +14,8 @@ class Problem:
 
     def get_output(self):
         s = str(len(self.slideshow)) + "\n"
-        s += ["\n".join(" ".join(photo.id for photo in slide) for slide in self.slideshow)]
+        for slide in self.slideshow:
+            s+= " ".join(str(photo.id) for photo in slide.photos) + "\n"
         return s
 
     def slide_creator(self):
@@ -23,7 +24,7 @@ class Problem:
         enattente = None
         for f in self.photos:
             if f.is_horizontal:
-                slides.append([f])
+                slides.append(Slide([f]))
             elif enattente:
                 slides.append(Slide([enattente, f]))
                 enattente = None

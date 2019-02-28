@@ -9,6 +9,6 @@ def problem_parser(file_name):
         for i in xrange(n):
             l = input_file.readline().strip().split()
             is_horizontal = l[0] == "H"
-            tags = l[2:]
+            tags = set(l[2:])
             photos.append(Photo(i, is_horizontal, tags))
     return Problem(photos)

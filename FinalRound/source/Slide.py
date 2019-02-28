@@ -1,7 +1,10 @@
 class Slide:
     def __init__(self, photos):
         self.photos=photos
-        self.tags=set.union(*[photo.tags for photo in photos])
+        if len(photos) == 1 :
+            self.tags = photos[0].tags
+        else :
+            self.tags = photos[0].tags.union(photos[1].tags)
 
     def __str__(self):
         return "slide {}\n".format(str(self.photos))
