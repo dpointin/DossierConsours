@@ -1,16 +1,14 @@
 from Problem import Problem
-from Vehicle import Vehicle
-from Ride import Ride
-import numpy as np
+from Photo import Photo
 
 
 def problem_parser(file_name):
     with open(file_name, "r") as input_file:
-        r, c, f, n, bonus, t = map(int, input_file.readline().strip().split())
-        grid = np.zeros(shape=(r, c))
-        vehicles = [Vehicle(i+1, t) for i in xrange(f)]
-        rides = []
+        n = int(input_file.readline().strip())
+        photos = []
         for i in xrange(n):
-            a, b, x, y, s, f = map(int, input_file.readline().strip().split())
-            rides.append(Ride(i, (a, b), (x, y), s, f))
-        return Problem(grid, vehicles, rides, t, bonus)
+            l = input_file.readline().strip().split()
+            is_horizontal = l[0] == "H"
+            tags = l[2:]
+            photos.append(Photo(i, is_horizontal, tags))
+    return Problem(photos)
