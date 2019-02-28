@@ -22,21 +22,32 @@ class Problem:
         return "\n".join(v.get_output() for v in self.list_vehicles)
 
     def solve(self):
-        self.list_rides = [r for r in self.list_rides if r.feasible]
+        excluded_rides = [r for r in self.list_rides if r.feasible and r.end_point[0]>9000 or r.end_point[1]>9000]
+        self.list_rides = [r for r in self.list_rides if r.feasible and r.end_point[0]<9000 and r.end_point[1]<9000]
         print "Max score = ", sum(r.length for r in self.list_rides)+self.bonus * len(self.list_rides)
         self.list_rides.sort(key=lambda x: x.length, reverse=True)
         self.list_rides = deque(self.list_rides)
         remaining_rides_id = set(r.id for r in self.list_rides)
+        remaining_excluded_rides_id = set(r.id for r in self.list_rides)
 
         for current_time in tqdm.tqdm(xrange(self.time)):
             # print self
             for vehicle in self.list_vehicles:
                 if vehicle.time == 0:
-                    possible_rides = [r for r in self.list_rides if
-                                      r.id in remaining_rides_id and vehicle.ride_duration(r, current_time)+  current_time < r.end_time]
-                    if possible_rides:
-                        best_ride = max(possible_rides, key=lambda ride: vehicle.ride_score(ride, current_time, 150*self.bonus))
+                    possible_excluded_rides=[r for r in excluded_rides if
+                                      r.id in remaining_excluded_rides_id and 25> r.end_time -vehicle.ride_duration(r, current_time)+  current_time]
+                    if possible_excluded_rides:
+                        best_ride = max(possible_excluded_rides,
+                                        key=lambda ride: vehicle.ride_score(ride, current_time, self.bonus))
                         vehicle.affect_ride(best_ride, current_time)
-                        remaining_rides_id.remove(best_ride.id)
+                        remaining_excluded_rides_id.remove(best_ride.id)
+                    if vehicle.time == 0:
+                        possible_rides = [r for r in self.list_rides if
+                                      r.id in remaining_rides_id and vehicle.ride_duration(r, current_time)+  current_time < r.end_time]
+                        if possible_rides:
+                            best_ride = max(possible_rides, key=lambda ride: vehicle.ride_score(ride, current_time, self.bonus))
+                            #  vehicle.ride_score_recursif(ride, current_time, possible_rides,remaining_rides_id,1,self.bonus))
+                            vehicle.affect_ride(best_ride, current_time)
+                            remaining_rides_id.remove(best_ride.id)
                 vehicle.time -= 1
         return ""
