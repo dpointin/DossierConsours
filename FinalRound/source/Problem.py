@@ -12,7 +12,7 @@ class Problem:
     def get_output(self):
         s = str(len(self.slideshow))+"\n"
         s += ["\n".join(" ".join(photo.id for photo in slide) for slide in self.slideshow)]
-        return "\n".join(v.get_output() for v in self.list_vehicles)
+        return s
 
     def solve(self):
         pass
