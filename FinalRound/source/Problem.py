@@ -46,7 +46,7 @@ class Problem:
                 print "{} loops done over {}".format(i,s)
             max_score = -1
             max_slide = None
-            for slide in self.slides :
+            for slide in self.slides[:1000] :
                 slide_score = slide.score(curr_slide)
                 if slide_score > max_score :
                     max_score = slide_score

@@ -5,7 +5,7 @@ import os
 
 def get_input_files(project_name):
     input_folder = os.path.join(os.getcwd(), project_name, "input")
-    return sorted(os.path.abspath(os.path.join(input_folder, path)) for path in os.listdir(input_folder))
+    return sorted(os.path.abspath(os.path.join(input_folder, path)) for path in os.listdir(input_folder) )
 
 
 def hash_code(project_name):

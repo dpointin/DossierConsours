@@ -21,9 +21,14 @@ def zip_folder(zip_name, folder_to_zip):
 
 class OutputSubmitter:
     LOGIN_PATH = "https://accounts.google.com/ServiceLogin/signinchooser"
-    SUBMISSION_PATH = 'https://hashcodejudge.withgoogle.com/#/rounds/5736842779426816/submissions/'
-    LOGIN = "matthias.larre"
-    PASSWORD = "XXXXXXXXX"  # set your google password here
+    SUBMISSION_PATH = 'https://hashcodejudge.withgoogle.com/?fbclid=IwAR2w6c78ZORzjx7yQpDlz3jKaJzOmnlM4hIFRBtUAOpBkX4FHZRD1P7Rpy4#/rounds/6417837228818432/submissions/'
+
+
+
+
+
+    LOGIN = "damien.pointin2"
+    PASSWORD = "234567damANN"  # set your google password here
 
     def __init__(self, project_name):
         self.web_browser = webdriver.Chrome()
