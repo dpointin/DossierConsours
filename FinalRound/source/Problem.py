@@ -14,5 +14,10 @@ class Problem:
         s += ["\n".join(" ".join(photo.id for photo in slide) for slide in self.slideshow)]
         return s
 
+    def slide_creator(self):
+        bol=False
+        for f in photos:
+            if f.is_horizontal
+
     def solve(self):
         pass
