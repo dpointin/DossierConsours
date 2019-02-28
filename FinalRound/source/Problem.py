@@ -3,6 +3,7 @@ class Problem:
     def __init__(self, photos):
         self.slideshow = []
         self.photos = photos
+        self.slides=self.slide_creator()
 
     def __str__(self):
         s = "Photos available {}\n".format(str(self.photos))
@@ -15,9 +16,18 @@ class Problem:
         return s
 
     def slide_creator(self):
+        slides=[]
         bol=False
-        for f in photos:
-            if f.is_horizontal
+        enattente=None
+        for f in self.photos:
+            if f.is_horizontal:
+                slides.append(f)
+            elif enattente:
+                slides.append(Slide(enattente,f))
+                enattente=None
+            else:
+                enattente=f
+        return slides
 
     def solve(self):
         pass
